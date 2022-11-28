@@ -94,27 +94,20 @@ WSGI_APPLICATION = 'hlsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if os.getenv("DATABASE_URL","") != "":
-    r = urlparse(os.environ.get("DATABASE_URL"))
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+
+if DEVELOPMENT_MODE is True:
     DATABASES = {
-        'default': {  
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  
-        'NAME': os.path.relpath(r.path,"/"),  
-        'USER': r.username,  
-        'PASSWORD': r.password,  
-        'HOST': r.hostname,  
-        'PORT': r.port,  
-        'OPTIONS': {  
-            'sslmode': "require"  
-        }    
-    }
-}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
+    }
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
 
 

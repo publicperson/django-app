@@ -1,0 +1,262 @@
+{% load static %}
+    <!-- <div class="row">
+            <img src="{{object.ProfilePicture.url}}" class="img-fluid rounded-lg pt-2" style="width:100px; height:100px; border-radius:100%;">
+            <div class="col-sm-10 offset-sm-1 py-5">
+                FirstName: {{object.FirstName}}  LastName: {{object.LastName}} OtherNames: {{object.OtherNames}}
+            </div>
+            <p>{{object.Role}}</p>
+            <p>{{object.PhonNumber}}</p>
+            <p>{{object.Email}}</p>
+            <p>Website:{{object.WebUrl}}</p>
+            <p>{{object.University}}</p>
+            <p>{{object.Programme}}</p>
+            <div>
+                <span>StartDate:{{object.StartDate}}</span>
+                <span>EndDate:{{object.EndDate}}</span>
+            </div>
+            {%for project in object.Project.all%}
+            <p>Project Title: {{project.Title}}</p>
+            <p>Project Description: {{project.Description}}</p>
+            <p>Project WebUrl: {{project.WebUrl}}</p>
+            <img src="{{project.ScreenShot.url}}" class="img-fluid rounded-lg pt-2" style="width:200px; height:200px;">
+            {%endfor%}
+            <p class="mt-3">{{object.Remark}}</p>
+        
+    </div>
+
+    <!DOCTYPE html>
+<html lang="en"> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personnel Information Platform</title>
+    <link rel="stylesheet" href="{%static 'style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/fav.png'%}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a82fd259f7.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <section id="header">
+        <a href="/"><img src="{% static 'img/hl logo.png'%}" height="40" class="logo" alt=""></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="/">Jobs</a></li>
+                <li><a a class="active" href="/personnel/">Personnel</a></li>
+            </ul>
+        </div>
+    </section>
+    <section id="profile" class="section-2">
+        <div class="big-space">
+            <div class="sidenav">
+                <a href="/"><img src="{% static 'img/hl logo.png'%}" height="60" class="logo" alt=""></a>
+                <div class="profile-image">
+                    <img src="{{object.Profile_Picture.url}}" width="100px" height='100px' style='border-radius:100%; ' alt="profile picture">
+                    <div class="profile-name">
+                        <h4>{{object.FirstName}} {{object.LastName}} </h4>
+                        <h5>{{object.Status}}</h5>
+                    </div>
+                </div>
+                <div class="contact">
+                    <div class="singleCol mail">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span> {{object.Email}}</span>
+                    </div>
+                    <div class="tel">
+                        <i class="fa-solid fa-phone"></i>
+                        <span> {{object.Contact}}</span>
+                    </div>
+                    <div class="address">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span> {{object.Address}}</span>
+                    </div>
+                    {% comment %} <div class="linkedin">
+                        <i class="fa-brands fa-linkedin"></i>
+                        <span> Elpidio Tossou </span>
+                    </div>
+                    <div class="github">
+                        <i class="fa-brands fa-github"></i>
+                        <span> publicperson </span>
+                    </div> {% endcomment %}
+                </div>
+
+            </div>
+
+            <div class="content">
+                <div class="glass">
+                    <h4>Personel Details</h4>
+                    <div class="grid-con">
+                        <div class="grid-i">
+                            <span>First Name</span>
+                            <h5>{{object.FirstName}}</h5>
+                        </div>
+                        <div class="grid-i">
+                            <span>Last Name</span>
+                            <h5>{{object.LastName}}</h5>
+                        </div>
+                        <div class="grid-i">
+                            <span>Other Names</span>
+                            <h5>{{object.Other_Names}}</h5>
+                        </div>
+                        <div class="grid-i">
+                            <span>Gender</span>
+                            <h5>{{object.Gender}}</h5>
+                        </div>
+                        <div class="grid-i">
+                            <span>Contact</span>
+                            <h5>{{object.Contact}}</h5>
+                        </div>
+                        <div class="grid-i">
+                            <span>Address</span>
+                            <h5>{{object.Address}}</h5>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="cover">
+                        <H4>Summary</H4>
+                        <p>{{object.Summary}}</span></p>
+                    </div>
+                    <hr>
+                    <div>
+                        <H4>Education</H4>
+                        {% for education in object.Education.all %}
+                        <div class="uni-under">
+                            <h5>{{education.Programme}}</h5>
+                            <h6>{{education.Institution}}</h6>
+                            <span>{{education.Start_Date}} - {{education.End_Date}}</span>
+                        </div><br>
+                        {% endfor %}
+                        {% comment %} <div class="sec">
+                            {% for education in object.Education.all %}
+                            <h5>{{education.Programme}}</h5>
+                            <h6>{{education.University}}</h6>
+                            <span>{{education.Start_Date}} - {{education.End_Date}}</span>
+                            {% endfor %}
+                        </div> {% endcomment %}
+                    </div>
+                    <hr>
+                    <div>
+                        <H4>Skills</H4>
+                        <div class="con-skill">
+                            {% for skills in object.Skill.all%}
+                            <ul class="con-skill-list" style="list-style: none; padding-left:0">
+                                <li>{{skills.Title}}
+                                </li>
+                                {% comment %} <li>Digital Marketing
+                                </li>
+                                <li>Communication Skills
+                                </li>
+                                <li>Graphic Design
+                                </li>
+                                <li>Web Design
+                                </li> {% endcomment %}
+                            </ul>
+                            {% endfor %}
+                        </div>
+                        <hr>
+                        <H4>Experience</H4>
+                        <ul class="grid-con" style="list-style: none; padding-left:0">
+                            {% for experience in object.Experience.all%}
+                            <li class="grid-i">
+                                <label class="timeline-event-icon"></label>
+                                <div class="timeline-event-copy">
+                                    <p class="date">{{experience.Start_Date}} - {{experience.End_Date}}</p>
+                                    <h3>{{experience.Role}}</h3>
+                                    <h4>{{experience.Company}}</h4>
+                                    <p><br>{{experience.Task}}</p>
+                                    {% comment %} <p><strong>GRISPCO</strong><br>Built a website support programmes</p> {% endcomment %}
+                                </div>
+                            </li>
+                            {% endfor %}
+                            {% comment %} <li class="grid-i">
+                                <label class="timeline-event-icon"></label>
+                                <div class="timeline-event-copy">
+                                    <p class="date">November 2020 - March 2021</p>
+                                    <h3>Freelancer</h3>
+                                    <p><strong>Crypto System</strong><br>Built a system that can aid people to trade in BitCoin</p>
+                                </div>
+                            </li>
+                            <li class="grid-i">
+                                <label class="timeline-event-icon"></label>
+                                <div class="timeline-event-copy">
+                                    <p class="date">October 2019 - October 2021</p>
+                                    <h3>Graphic Designer</h3>
+                                    <h4>Flora Marketing</h4>
+                                    <p><strong>Key Soap</strong><br>Designed flyers and social graphics to market the key soap product</p>
+                                </div>
+                            </li> {% endcomment %}
+                        </ul>
+                        <hr>
+                        <H4>Projects</H4><br>
+                        <div class="row gx-5">
+                            {% for project in object.Project.all %}
+                            <div class="col-6">
+                                <h5><strong>{{project.Title}}</strong></h5><br>
+                                <h6><strong>Project Description</strong></h6>
+                                <p style="font-size: 12px;">{{project.Description}}</p>
+                                <h6><strong>Contribution</strong></h6>
+                                <p style="font-size: 12px;">{{project.Contribution}}</p> 
+                                <br>
+                                <h6><strong>Screenshots</strong></h6><br>
+                                <div style="float:inline-start ;">
+
+                                    <a href="img/11.jpg" target="_blank"><img src="{{project.ScreenShot.url}}" class="img-thumbnail" style="height: 110px; " alt="..."></a>
+                                    <a href="img/11.jpg" target="_blank"><img src="{{project.ScreenShot1.url}}" class="img-thumbnail" style="height: 110px; " alt="..."></a>
+                                    <a href="img/11.jpg" target="_blank"><img src="{{project.ScreenShot2.url}}" class="img-thumbnail" style="height: 110px; " alt="..."></a>
+                                    {% comment %} <a href="img/13.jpg" target="_blank"><img src="img/13.jpg" class="img-thumbnail" style="height: 110px; " alt="..."></a>
+                                    <a href="img/133.jpg" target="_blank"><img src="img/133.jpg" class="img-thumbnail" style="height: 110px; " alt="..."></a><br>
+                                    <br>
+                                    <a href="details.html"><button id="myBtn">View Project</button></a> {% endcomment %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% comment %} <div class="col-6">
+                                <h5><strong>GRISPCO</strong></h5><br>
+                                <h6><strong>Project Description</strong></h6>
+                                <p style="font-size: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas vitae scel</p>
+                                <h6><strong>Contribution</strong></h6>
+                                <p style="font-size: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas vitae scel</p>
+                                <br>
+                                <h6><strong>Screenshots</strong></h6><br>
+                                <div style="float:inline-start ;">
+                                    <a href="img/11.jpg" target="_blank"><img src="img/11.jpg" class="img-thumbnail" style="height: 110px; " alt="..."></a>
+                                    <a href="img/13.jpg" target="_blank"><img src="img/13.jpg" class="img-thumbnail" style="height: 110px; " alt="..."></a>
+                                    <a href="img/133.jpg" target="_blank"><img src="img/133.jpg" class="img-thumbnail" style="height: 110px; " alt="..."></a><br>
+                                    <br><button id="myBtn">View Project</button>
+                                </div><br><br>
+                            </div><br>
+                            <div class="col-6">
+                                <h5><strong>ITC</strong></h5><br>
+                                <h6><strong>Job Description</strong></h6>
+                                <p style="font-size: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas vitae scel</p>
+                                <h6><strong>Contribution</strong></h6>
+                                <p style="font-size: 12px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas vitae scel</p>
+                                <br>
+                                <h6><strong>Screenshots</strong></h6><br>
+                                <div style="float:inline-start ;">
+                                    <a href="img/11.jpg" target="_blank"><img src="img/11.jpg" class="img-thumbnail" style="height: 110px; " alt="..."></a>
+                                    <a href="img/13.jpg" target="_blank"><img src="img/13.jpg" class="img-thumbnail" style="height: 110px; " alt="..."></a>
+                                    <a href="img/133.jpg" target="_blank"><img src="img/133.jpg" class="img-thumbnail" style="height: 110px; " alt="..."></a><br>
+                                    <br><button id="myBtn">View Project</button>
+                                </div>
+                            </div> {% endcomment %}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+    <footer>
+        <div class="footer">
+            <h5>Ⓒ Heritors Labs 2022 </h5>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Personnel Information Platform</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <!-- CSS only -->
+        <link rel="icon" type="image/x-icon" href="{% static 'img/fav.png' %}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/a82fd259f7.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+    
+        <section id="header">
+            <a href="/"><img src="{% static 'img/cropped-Heritors-Lab-Logo-1536x489.png' %}" height="40" class="logo" alt=""></a>
+            <div>
+                <ul id="navbar">
+                    <li><a class="active" href="/">Jobs</a></li>
+                    <li><a  href="/personnel/">Personnel</a></li>
+                </ul>
+            </div>
+        </section>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="container-fluid p-0">
+            <div class="alert alert-success text-white {{ message.tags }} alert-dismissible fade show" role="alert" >
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <section id="Apply" class="section-p1">
+        <h2 style="text-align: center;">
+            <STRONG>HERITORS LABS JOB LISTINGS</STRONG>
+        </h2><br><br><br>
+        <div class="b-grid" style='display:flex;'>
+            <div class="s-grid"><br><br>
+                <h2>Together we Outnovate</h2>
+                <span>“It's not a faith in technology. It's faith in people.”</span>
+                <span>"Hard work spotlights the character of people: some turn up their sleeves, some turn up their noses, and some dont turn up at all." — Sam Ewing, author.</span><span>"Sometimes, you have to give up. Sometimes, knowing when to give up, when to try something else, is genius. Giving up doesn’t mean stopping. Don’t ever stop." — Phil Knight, co-founder of Nike</span>
+            </div>
+            <div class="s-grid">
+                <img src="{% static 'img/compu-image.png' %}" style="width: 100%; text-align: center;" alt="">
+            </div>
+        </div>
+    </section>
+    <section id="Apply" class="section-p1">
+        <h2><strong>Job Listings</strong></h2><br><br>
+        {%for job in jobs%}
+        <div id="1">
+            <h3>{{job.Title}}</h3>
+            <h6><strong>Job Description</strong></h6>
+            <p>{{job.Description}}</p>
+
+            <div style="display: flex; justify-content:start;">
+                <a href="{% url 'jobs:jobform' %}"><button style="margin-right: 20px;" id="myBtn">Apply</button></a>
+                <a class="btn btn-primary" style="background-color: white; color:black; border-radius: 0; border-color:black;" data-bs-toggle="collapse" href="#job{{job.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Details
+                        </a>
+            </div>
+            <div class="collapse" id="job{{job.id}}">
+                <div class="card card-body">
+                    <h6><strong>Required Skills</strong></h6>
+                    <p class="skill-l">
+                            {{job.Required_Skills|safe}}
+                        {% comment %} <li>
+                            <p>Experience in full-stack development (Java & Angular)</p>
+                        </li>
+                        <li>
+                            <p>Experience in working in an agile software development environment</p>
+                        </li> {% endcomment %}
+                    </p><br>
+                    <h6><strong>Location:</strong> {{job.Location}}</h6><br>
+                    <h6>{{job.Salary}}</h6><br>
+
+                </div>
+            </div>
+        </div><br>
+        <hr><br>
+        {%empty%}
+            <div class="col-sm-6 offset-3 text-center py-5 my-5">
+                <h3>No job Found!</h3>
+            </div>
+        {% endfor %}
+        
+        {% comment %} <div id="2">
+            <h3>Mobile App Developer</h3>
+            <h6><strong>Job Description</strong></h6>
+            <p>We are looking for a Mobile App Developer who will contribute to a hybrid app development for a sales department. The candidate must be familiar with hybrid app development for IOS & Android with Java for backend & Angular for frontend.</p>
+
+            <div style="display: flex; justify-content:start;">
+                <a href="apply_form.html"><button style="margin-right: 20px;" id="myBtn">Apply</button></a>
+                <a class="btn btn-primary" style="background-color: white; color:black; border-radius: 0; border-color:black;" data-bs-toggle="collapse" href="#job2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Details
+                        </a>
+            </div>
+            <div class="collapse" id="job2">
+                <div class="card card-body">
+                    <h6><strong>Required Skills</strong></h6>
+                    <ul class="skill-l">
+                        <li>
+                            <p>Experience with hybrid app development</p>
+                        </li>
+                        <li>
+                            <p>Experience in full-stack development (Java & Angular)</p>
+                        </li>
+                        <li>
+                            <p>Experience in working in an agile software development environment</p>
+                        </li>
+                    </ul><br>
+                    <h6><strong>Salary:</strong> GH₵ 30,000</h6><br>
+                    <h6><strong>Location:</strong> 100% Romote</h6><br>
+
+                </div>
+            </div>
+        </div><br>
+        <hr><br>
+        <div id="3">
+            <h3>Mobile App Developer</h3>
+            <h6><strong>Job Description</strong></h6>
+            <p>We are looking for a Mobile App Developer who will contribute to a hybrid app development for a sales department. The candidate must be familiar with hybrid app development for IOS & Android with Java for backend & Angular for frontend.</p>
+
+            <div style="display: flex; justify-content:start;">
+                <a href="apply_form.html"><button style="margin-right: 20px;" id="myBtn">Apply</button></a>
+                <a class="btn btn-primary" style="background-color: white; color:black; border-radius: 0; border-color:black;" data-bs-toggle="collapse" href="#job3" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Details
+                        </a>
+            </div>
+            <div class="collapse" id="job3">
+                <div class="card card-body">
+                    <h6><strong>Required Skills</strong></h6>
+                    <ul class="skill-l">
+                        <li>
+                            <p>Experience with hybrid app development</p>
+                        </li>
+                        <li>
+                            <p>Experience in full-stack development (Java & Angular)</p>
+                        </li>
+                        <li>
+                            <p>Experience in working in an agile software development environment</p>
+                        </li>
+                    </ul><br>
+                    <h6><strong>Salary:</strong> GH₵ 30,000</h6><br>
+                    <h6><strong>Location:</strong> 100% Romote</h6><br>
+
+                </div>
+            </div>
+        </div> {% endcomment %}
+
+
+
+    </section>
+
+    <footer>
+        <div class="footer">
+            <h5> </h5>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+{
+    "editor.inlayHints.fontFamily": "'JetBrains Mono'",
+    "markdown.preview.fontFamily": "'JetBrains Mono',-apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif",
+    "notebook.outputFontFamily": "'JetBrains Mono'",
+    "terminal.integrated.fontFamily": "'JetBrains Mono'"
+}

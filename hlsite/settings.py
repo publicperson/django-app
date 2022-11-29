@@ -100,10 +100,10 @@ if os.getenv("DATABASE_URL","") != "":
         'default': {  
         'ENGINE': 'django.db.backends.postgresql_psycopg2',  
         'NAME': os.path.relpath(r.path,"/"),  
-        'USER': 'db',  
-        'PASSWORD': 'AVNS_JNWc3uOUH1_S1dd6Azt',  
-        'HOST': 'app-133f5848-cc20-4698-86cb-83eefa375e5c-do-user-10361139-0.b.db.ondigitalocean.com',  
-        'PORT': '25060',  
+        'USER': r.username,  
+        'PASSWORD': r.password,  
+        'HOST': r.hostname,  
+        'PORT': r.port,  
         'OPTIONS': {  
             'sslmode': "require"  
         }    

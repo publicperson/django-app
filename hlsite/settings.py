@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 from django.core.management.utils import get_random_secret_key
+import sys
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,10 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY ='django-insecure-f8g-k0$t)1n8i%+c6&pe&u5#7b7fuoh(duee!-chw7#%-n)i1r'
+#SECRET_KEY ='django-insecure-f8g-k0$t)1n8i%+c6&pe&u5#7b7fuoh(duee!-chw7#%-n)i1r'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 #DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
@@ -36,7 +40,6 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'/media/')
-
 
 
 # Application definition
@@ -95,19 +98,35 @@ WSGI_APPLICATION = 'hlsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {  
-        'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'djangodb',  
-        'USER': 'root',  
-        'PASSWORD': '@Thl22HL!',  
-        'HOST': '127.0.0.1',  
-        'PORT': '3306',  
-        'OPTIONS': {  
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
-        }    
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+
+if DEVELOPMENT_MODE is True:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
     }
-}
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    }
+
+# DATABASES = {
+#     'default': {  
+#         'ENGINE': 'django.db.backends.mysql',  
+#         'NAME': 'djangodb',  
+#         'USER': 'root',  
+#         'PASSWORD': '@Thl22HL!',  
+#         'HOST': '127.0.0.1',  
+#         'PORT': '3306',  
+#         'OPTIONS': {  
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+#         }    
+#     }
+# }
 
 
 # Password validation

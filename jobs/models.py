@@ -7,7 +7,6 @@ import uuid
 
 
 class JobList(models.Model):
-    id = models.UUIDField(blank=True, default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)
     Title = models.CharField(max_length=258)
     Type = models.CharField(max_length=200, blank=True)
     Description = models.TextField()

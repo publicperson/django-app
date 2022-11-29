@@ -9,12 +9,10 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import sys
-import dj_database_url
+
 from pathlib import Path
 import os
 from django.core.management.utils import get_random_secret_key
-from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY',get_random_secret_key())
+SECRET_KEY ='django-insecure-f8g-k0$t)1n8i%+c6&pe&u5#7b7fuoh(duee!-chw7#%-n)i1r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = True
 
 #DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
@@ -94,28 +92,19 @@ WSGI_APPLICATION = 'hlsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if os.getenv("DATABASE_URL","") != "":
-    r = urlparse(os.environ.get("DATABASE_URL"))
-    DATABASES = {
-        'default': {  
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  
-        'NAME': os.path.relpath(r.path,"/"),  
-        'USER': r.username,  
-        'PASSWORD': r.password,  
-        'HOST': r.hostname,  
-        'PORT': r.port,  
+DATABASES = {
+    'default': {  
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'djangodb',  
+        'USER': 'root',  
+        'PASSWORD': '@Thl22HL!',  
+        'HOST': '127.0.0.1',  
+        'PORT': '3306',  
         'OPTIONS': {  
-            'sslmode': "require"  
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
         }    
     }
 }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
 
 
 # Password validation
@@ -153,7 +142,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

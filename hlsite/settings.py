@@ -119,19 +119,19 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
 
-DATABASES = {
-    'default': {  
-        'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'djangodb',  
-        'USER': 'root',  
-        'PASSWORD': '@Thl22HL!',  
-        'HOST': '127.0.0.1',  
-        'PORT': '3306',  
-        'OPTIONS': {  
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
-        }    
-    }
-}
+# DATABASES = {
+#     'default': {  
+#         'ENGINE': 'django.db.backends.mysql',  
+#         'NAME': 'djangodb',  
+#         'USER': 'root',  
+#         'PASSWORD': '@Thl22HL!',  
+#         'HOST': '127.0.0.1',  
+#         'PORT': '3306',  
+#         'OPTIONS': {  
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+#         }    
+#     }
+# }
 
 
 # Password validation

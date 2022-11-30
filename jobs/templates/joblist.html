@@ -61,11 +61,11 @@
 
             <div style="display: flex; justify-content:start;">
                 <a href="{% url 'jobs:jobform' %}"><button style="margin-right: 20px;" id="myBtn">Apply</button></a>
-                <a class="btn btn-primary" style="background-color: white; color:black; border-radius: 0; border-color:black;" data-bs-toggle="collapse" href="#job{{job.uuid}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a class="btn btn-primary" style="background-color: white; color:black; border-radius: 0; border-color:black;" data-bs-toggle="collapse" href="#job{{job.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                         Details
                         </a>
             </div>
-            <div class="collapse" id="job{{job.uuid}}">
+            <div class="collapse" id="job{{job.id}}">
                 <div class="card card-body">
                     <h6><strong>Required Skills</strong></h6>
                     <p class="skill-l">

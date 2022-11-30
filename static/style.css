@@ -549,10 +549,11 @@ body {
 }
 
 .b-grid {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    column-gap: 30px;
+    grid-template-columns: auto auto;
 }
 
 .s-grid {
-    flex-basis: 45%;
+    padding: 20px 20px;
 }

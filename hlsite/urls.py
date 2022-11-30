@@ -27,7 +27,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('personnel/',include(personnel_urls, namespace='personnel')),
     path('',include(jobs_urls,namespace='jobs')),
-]
- 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

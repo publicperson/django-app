@@ -33,12 +33,12 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 #DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-#[]
+#ALLLOWED_HOSTS = []
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 # Application definition
@@ -96,6 +96,12 @@ WSGI_APPLICATION = 'hlsite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
@@ -113,19 +119,19 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
 
-# DATABASES = {
-#     'default': {  
-#         'ENGINE': 'django.db.backends.mysql',  
-#         'NAME': 'djangodb',  
-#         'USER': 'root',  
-#         'PASSWORD': '@Thl22HL!',  
-#         'HOST': '127.0.0.1',  
-#         'PORT': '3306',  
-#         'OPTIONS': {  
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
-#         }    
-#     }
-# }
+DATABASES = {
+    'default': {  
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'djangodb',  
+        'USER': 'root',  
+        'PASSWORD': '@Thl22HL!',  
+        'HOST': '127.0.0.1',  
+        'PORT': '3306',  
+        'OPTIONS': {  
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+        }    
+    }
+}
 
 
 # Password validation

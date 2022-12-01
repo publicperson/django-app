@@ -1,4 +1,4 @@
-d{% load static %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +50,7 @@ d{% load static %}
                 <img src="{% static 'img/compu-image.png' %}" style="width: 100%; text-align: center;" alt="">
             </div>
     </section>
-    <section id="Apply" class="section-p1">
+    <section id="Apply" class="section-p1" style="margin-top:-50px">
         <h2><strong>Job Listings</strong></h2><br><br>
         {%for job in jobs%}
         <div id="1">
